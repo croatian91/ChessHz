@@ -20,6 +20,7 @@
         "https://chess24.com/*/game/*"
       ],
       "js": [
+        "jquery-1.12.1.min.js",
         "chess24.js"
       ]
     }
