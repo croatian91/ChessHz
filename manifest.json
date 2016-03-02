@@ -32,6 +32,15 @@
         "jquery-1.12.1.min.js",
         "lichess.js"
       ]
+    },
+    {
+      "matches": [
+        "http://play.chessbase.com/js/apps/playchess/"
+      ],
+      "js": [
+        "jquery-1.12.1.min.js",
+        "playchess.js"
+      ]
     }
   ],
   "permissions": [

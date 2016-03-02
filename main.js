@@ -1,8 +1,9 @@
 var ws = new WebSocket("ws://localhost:1337/");
 
-/*ws.onmessage = function (event) {
- var data = event.data;
- };*/
+ws.onmessage = function (event) {
+    var data = event.data;
+    alert(data);
+};
 
 chrome.runtime.onConnect.addListener(function (p) {
     if (p.name == "easy-chess") {

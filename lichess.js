@@ -4,17 +4,17 @@
 
 $(document).ready(function () {
     var port = chrome.runtime.connect({name: "easy-chess"});
-    var i = 0;
 
     $('.moves').on('DOMNodeInserted', function (e) {
-        var moves = new Array();
+        if ($(e.target)[0].tagName === 'MOVE' && !$(e.target).hasClass('active')) {
+            var moves = new Array();
 
-        $('move').each(function () {
-            moves.push($(this).text());
-            console.log($(this).text());
-        });
+            $('move').each(function () {
+                moves.push($(this).text());
+            });
 
-        port.postMessage(JSON.stringify({job: 'getBestMove', moves: moves}));
+            port.postMessage(JSON.stringify({job: 'getBestMove', moves: moves}));
+        }
     });
 });
 
