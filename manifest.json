@@ -23,6 +23,15 @@
         "jquery-1.12.1.min.js",
         "chess24.js"
       ]
+    },
+    {
+      "matches": [
+        "http://*.lichess.org/*"
+      ],
+      "js": [
+        "jquery-1.12.1.min.js",
+        "lichess.js"
+      ]
     }
   ],
   "permissions": [
