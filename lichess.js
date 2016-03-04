@@ -5,15 +5,17 @@
 $(document).ready(function () {
     var port = chrome.runtime.connect({name: "easy-chess"});
 
-    $('.moves').on('DOMNodeInserted', function (e) {
-        if ($(e.target)[0].tagName === 'MOVE' && !$(e.target).hasClass('active')) {
+    $('.cg-board').on('DOMNodeInserted', function (e) {
+        if($(e.target).context.nodeName === 'PIECE'){
             var moves = new Array();
+            var wtime = $('.clock_white > .time').text();
+            var btime = $('.clock_black > .time').text();
 
             $('move').each(function () {
                 moves.push($(this).text());
             });
 
-            port.postMessage(JSON.stringify({job: 'getBestMove', moves: moves}));
+            port.postMessage(JSON.stringify({job: 'getBestMove', moves: moves, wtime: wtime, btime: btime}));
         }
     });
 });
