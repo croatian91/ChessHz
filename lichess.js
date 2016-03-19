@@ -5,8 +5,8 @@
 $(document).ready(function () {
     var port = chrome.runtime.connect({name: "easy-chess"});
 
-    $('.cg-board').on('DOMNodeInserted', function (e) {
-        if($(e.target).context.nodeName === 'PIECE'){
+    $('.moves').on('DOMNodeInserted	', function (e) {
+        if ($(e.target).hasClass('active') || $(e.target).hasClass('moves')) {
             var moves = new Array();
             var wtime = $('.clock_white > .time').text();
             var btime = $('.clock_black > .time').text();
