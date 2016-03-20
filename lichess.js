@@ -5,6 +5,10 @@
 $(document).ready(function () {
     var port = chrome.runtime.connect({name: "easy-chess"});
 
+    port.onMessage.addListener(function (msg) {
+        console.log(msg);
+    });
+
     $('.moves').on('DOMNodeInserted	', function (e) {
         if ($(e.target).hasClass('active') || $(e.target).hasClass('moves')) {
             var moves = new Array();
