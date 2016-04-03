@@ -41,6 +41,15 @@
         "jquery-1.12.1.min.js",
         "playchess.js"
       ]
+    },
+    {
+      "matches": [
+        "https://live.chess.com/live?v=*#g=*"
+      ],
+      "js": [
+        "jquery-1.12.1.min.js",
+        "chess.js"
+      ]
     }
   ],
   "permissions": [

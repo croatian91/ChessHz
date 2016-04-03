@@ -6,7 +6,6 @@ chrome.runtime.onConnect.addListener(function (p) {
     });
 
     ws.onmessage = function (event) {
-        console.log(event.data);
         p.postMessage(event.data);
     };
 });
