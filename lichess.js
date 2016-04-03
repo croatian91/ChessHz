@@ -34,14 +34,19 @@ $(document).ready(function () {
     $('.moves').on('DOMNodeInserted	', function (e) {
         if ($(e.target).hasClass('active') || $(e.target).hasClass('moves')) {
             var moves = new Array();
-            var wtime = $('.clock_white > .time').text();
-            var btime = $('.clock_black > .time').text();
+            var wtime = $('.clock_white > .time').text().split(':');
+            var btime = $('.clock_black > .time').text().split(':');
 
             $('move').each(function () {
                 moves.push($(this).text());
             });
 
-            port.postMessage(JSON.stringify({job: 'getBestMove', moves: moves, wtime: wtime, btime: btime}));
+            port.postMessage(JSON.stringify({
+                job: 'getBestMove',
+                moves: moves,
+                wtime: parseInt(wtime[0]) * 60000 + parseInt(wtime[1]) * 1000,
+                btime: parseInt(btime[0]) * 60000 + parseInt(btime[1]) * 1000
+            }));
         }
     });
 });
