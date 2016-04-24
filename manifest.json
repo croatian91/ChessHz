@@ -35,16 +35,7 @@
     },
     {
       "matches": [
-        "http://play.chessbase.com/js/apps/playchess/"
-      ],
-      "js": [
-        "jquery-1.12.1.min.js",
-        "playchess.js"
-      ]
-    },
-    {
-      "matches": [
-        "https://live.chess.com/live?v=*#g=*"
+        "https://live.chess.com/live?v=*"
       ],
       "js": [
         "jquery-1.12.1.min.js",

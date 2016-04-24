@@ -9,13 +9,20 @@ $(document).ready(function () {
         console.log(msg);
     });
 
-    $('.notation').on('DOMNodeInserted	', function (e) {
-        var moves = new Array();
+    $('.gameBorderContainer').on('DOMNodeInserted', function (e) {
+        if ($(e.target).is('.boardContainer')) {
+            console.log('target');
+            $('.moves_controls').on('DOMNodeInserted', function (e) {
+                var moves = new Array();
 
-        $('.gotomove').each(function () {
-            moves.push($(this).text());
-        });
+                $('.gotomove').each(function () {
+                    moves.push($(this).text());
+                });
 
-        port.postMessage(JSON.stringify({job: 'getBestMove', moves: moves}));
+                console.log(moves);
+
+                //port.postMessage(JSON.stringify({job: 'getBestMove', moves: moves}));
+            });
+        }
     });
 });

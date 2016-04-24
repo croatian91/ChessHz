@@ -5,16 +5,22 @@ $(document).ready(function () {
         console.log(msg);
     });
 
-    $('.notationList').on('DOMNodeInserted', function (e) {
-        if ($(e.target).hasClass('move')) {
-            /*var moves = new Array();
+    $('.current').on('DOMNodeInserted', function (e) {
+        if ($(e.target).hasClass('notiBox')) {
+            var moves = new Array();
+            var wtime = $('.white > .runningTime').text().split(':');
+            var btime = $('.black > .runningTime').text().split(':');
 
-             $('.move').each(function () {
-             moves.push($(this).text());
-             });
+            $('.move').each(function () {
+                moves.push($(this).text().replace(/[^a-zA-Z0-9+-]+/g,''));
+            });
 
-             port.postMessage(JSON.stringify({job: 'getBestMove', moves: moves}));*/
-            console.log($(e.target).baseURI);
+            port.postMessage(JSON.stringify({
+                job: 'getBestMove',
+                moves: moves,
+                wtime: parseInt(wtime[0]) * 60000 + parseInt(wtime[1]) * 1000,
+                btime: parseInt(btime[0]) * 60000 + parseInt(btime[1]) * 1000
+            }));
         }
     });
 });
