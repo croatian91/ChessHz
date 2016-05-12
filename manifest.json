@@ -20,7 +20,7 @@
         "https://chess24.com/*/game/*"
       ],
       "js": [
-        "jquery-1.12.1.min.js",
+        "jquery-2.2.3.min.js",
         "chess24.js"
       ]
     },
@@ -29,8 +29,13 @@
         "http://*.lichess.org/*"
       ],
       "js": [
-        "jquery-1.12.1.min.js",
+        "jquery-2.2.3.min.js",
+        "raphael-2.1.4.min.js",
+        "justgage.js",
         "lichess.js"
+      ],
+      "css": [
+        "gauge.css"
       ]
     },
     {
@@ -38,7 +43,7 @@
         "https://live.chess.com/live?v=*"
       ],
       "js": [
-        "jquery-1.12.1.min.js",
+        "jquery-2.2.3.min.js",
         "chess.js"
       ]
     }
@@ -47,5 +52,8 @@
     "tabs",
     "nativeMessaging",
     "activeTab"
+  ],
+  "web_accessible_resources": [
+    "gauge.html"
   ]
 }

@@ -12,7 +12,7 @@ $(document).ready(function () {
     };
 
     port.onMessage.addListener(function (msg) {
-        var bestmove = JSON.parse(msg).bestmove;
+        var bestmove = JSON.parse(msg).bestResponse.moveToPlay;
         var f = $('._' + coords[bestmove.from]);
         var t = $('._' + coords[bestmove.to]);
 
@@ -22,6 +22,8 @@ $(document).ready(function () {
 
         f.css("background-color", "red");
         t.css("background-color", "red");
+
+        console.log(msg);
     });
 
     $('.current').on('DOMNodeInserted', function (e) {

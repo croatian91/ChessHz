@@ -9,8 +9,11 @@ $(document).ready(function () {
         console.log(msg);
     });
 
+    console.log($('.gameBorderContainer'));
+
     $('.gameBorderContainer').on('DOMNodeInserted', function (e) {
-        if ($(e.target).is('.boardContainer')) {
+        console.log('sfdsfsfsdfs');
+        /*if ($(e.target).is('.boardContainer')) {
             console.log('target');
             $('.moves_controls').on('DOMNodeInserted', function (e) {
                 var moves = new Array();
@@ -21,8 +24,8 @@ $(document).ready(function () {
 
                 console.log(moves);
 
-                //port.postMessage(JSON.stringify({job: 'getBestMove', moves: moves}));
+                port.postMessage(JSON.stringify({job: 'getBestMove', moves: moves}));
             });
-        }
+        }*/
     });
 });

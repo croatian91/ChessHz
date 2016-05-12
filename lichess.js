@@ -4,6 +4,7 @@
 
 $(document).ready(function () {
     var port = chrome.runtime.connect({name: "easy-chess"});
+    var g = null;
     var coords = [
         'a8', 'b8', 'c8', 'd8', 'e8', 'f8', 'g8', 'h8',
         'a7', 'b7', 'c7', 'd7', 'e7', 'f7', 'g7', 'h7',
@@ -15,10 +16,28 @@ $(document).ready(function () {
         'a1', 'b1', 'c1', 'd1', 'e1', 'f1', 'g1', 'h1'
     ];
 
+    $.get(chrome.extension.getURL('/gauge.html'), function (data) {
+        $(data).appendTo('.lichess_ground');
+        g = new JustGage({
+            id: "gauge",
+            value: 0,
+            min: -10,
+            max: 10,
+            hideMinMax: true,
+            decimals: true,
+            title: "Evaluation",
+            noGradient: true,
+            gaugeColor: "#edebeb"
+        });
+    });
+
     port.onMessage.addListener(function (msg) {
         var squares = ($('.cg-board').hasClass('orientation-white')) ? $('square').get() : $('square').get().reverse();
         var offset = $('square').first().width() / 2;
-        var bestmove = JSON.parse(msg).bestmove;
+        var evaluation = ($(JSON.parse(msg).info)).get(-1);
+        var bestmove = JSON.parse(msg).bestResponse.moveToPlay;
+        var value = (evaluation) ? evaluation.score.value : 0;
+        var type = (evaluation) ? evaluation.score.type : 'no evaluation';
 
         var f = $(squares[coords.indexOf(bestmove.from)]);
         var t = $(squares[coords.indexOf(bestmove.to)]);
@@ -28,7 +47,7 @@ $(document).ready(function () {
         f.css("background-color", "red");
         t.css("background-color", "red");
 
-        console.log(msg);
+        g.refresh((parseFloat(value)/ 100.0));
     });
 
     $('.moves').on('DOMNodeInserted	', function (e) {
