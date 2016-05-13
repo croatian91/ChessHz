@@ -36,9 +36,6 @@
         "raphael-2.1.4.min.js",
         "justgage.js",
         "lichess.js"
-      ],
-      "css": [
-        "gauge.css"
       ]
     },
     {

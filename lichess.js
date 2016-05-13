@@ -26,7 +26,7 @@ $(document).ready(function () {
             hideMinMax: true,
             decimals: true,
             title: "Evaluation",
-            label: "",
+            label: "cp",
             noGradient: true,
             gaugeWidthScale: 0.2,
             gaugeColor: "#808080",
