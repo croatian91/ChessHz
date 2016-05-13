@@ -20,14 +20,19 @@ $(document).ready(function () {
         $(data).appendTo('.lichess_ground');
         g = new JustGage({
             id: "gauge",
-            value: 0,
-            min: -10,
-            max: 10,
+            value: 0.0,
+            min: -10.0,
+            max: 10.0,
             hideMinMax: true,
             decimals: true,
             title: "Evaluation",
+            label: "",
             noGradient: true,
-            gaugeColor: "#edebeb"
+            gaugeWidthScale: 0.2,
+            gaugeColor: "#808080",
+            levelColors: [
+                "#ffffff"
+            ]
         });
     });
 
@@ -47,7 +52,8 @@ $(document).ready(function () {
         f.css("background-color", "red");
         t.css("background-color", "red");
 
-        g.refresh((parseFloat(value)/ 100.0));
+        g.refresh((parseFloat(value) / 100.0), 10, {label: type});
+        g.label = type;
     });
 
     $('.moves').on('DOMNodeInserted	', function (e) {

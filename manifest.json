@@ -28,6 +28,9 @@
       "matches": [
         "http://*.lichess.org/*"
       ],
+      "exclude_matches": [
+        "http://*.lichess.org/"
+      ],
       "js": [
         "jquery-2.2.3.min.js",
         "raphael-2.1.4.min.js",
