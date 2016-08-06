@@ -19,11 +19,18 @@
             <h3 class="form-signin-heading">ChessHz - Login</h3>
             <hr class="colorgraph">
             <br>
+            <div class="alert alert-danger" role="alert">
+                <strong>Error!</strong> Could not sign in.
+            </div>
 
-            <input type="text" class="form-control" name="Username" placeholder="Username" required="" autofocus=""/>
-            <input type="password" class="form-control" name="Password" placeholder="Password" required=""/>
+            <input type="text" class="form-control" name="Username" id="username" placeholder="Username" required=""
+                   autofocus=""/>
+            <input type="password" class="form-control" name="Password" id="password" placeholder="Password"
+                   required=""/>
 
-            <button class="btn btn-lg btn-primary btn-block" name="Submit" id="submit" value="Login" type="submit">Login</button>
+            <button class="btn btn-lg btn-primary btn-block" name="Submit" id="submit" value="Login" type="submit">
+                Login
+            </button>
             <div>
                 <a href="https://www.chesshz.top/register/">Create account</a> or <a
                     href="https://www.chesshz.top/reset/">reset password</a>

@@ -49,7 +49,7 @@
   ],
   "permissions": [
     "tabs",
-    "https://www.chesshz.top/login",
+    "*://www.chesshz.top/*",
     "nativeMessaging",
     "activeTab"
   ],

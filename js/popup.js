@@ -6,7 +6,22 @@ $(document).ready(function () {
     });
 
     $('#submit').on('click', function () {
-        alert('fdsfssd');
+        var data = {
+            username: $('#username').val(),
+            password: $('#password').val()
+        };
+
+        $.ajax({
+            type: "POST",
+            url: "https://www.chesshz.top/login",
+            data: JSON.stringify(data),
+            success: function (res) {
+                console.log(res);
+            },
+            error: function (xhr, status) {
+                $(".alert").css("display", "block");
+            }
+        });
     });
 });
 
