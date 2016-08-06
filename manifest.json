@@ -10,7 +10,7 @@
   },
   "background": {
     "scripts": [
-      "main.js"
+      "js/main.js"
     ],
     "persistent": false
   },
@@ -20,22 +20,20 @@
         "https://chess24.com/*/game/*"
       ],
       "js": [
-        "jquery-2.2.3.min.js",
-        "chess24.js"
+        "js/jquery-2.2.3.min.js",
+        "js/chess24.js"
       ]
     },
     {
       "matches": [
-        "http://*.lichess.org/*"
+        "https://*.lichess.org/*"
       ],
       "exclude_matches": [
-        "http://*.lichess.org/"
+        "https://*.lichess.org/"
       ],
       "js": [
-        "jquery-2.2.3.min.js",
-        "raphael-2.1.4.min.js",
-        "justgage.js",
-        "lichess.js"
+        "js/jquery-2.2.3.min.js",
+        "js/lichess.js"
       ]
     },
     {
@@ -43,13 +41,15 @@
         "https://live.chess.com/live?v=*"
       ],
       "js": [
-        "jquery-2.2.3.min.js",
-        "chess.js"
-      ]
+        "js/jquery-2.2.3.min.js",
+        "js/chess.js"
+      ],
+      "run_at": "document_end"
     }
   ],
   "permissions": [
     "tabs",
+    "https://www.chesshz.top/login",
     "nativeMessaging",
     "activeTab"
   ],
