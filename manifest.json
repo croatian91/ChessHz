@@ -49,7 +49,7 @@
   ],
   "permissions": [
     "tabs",
-    "*://www.chesshz.top/*",
+    "http://localhost:3000/auth",
     "nativeMessaging",
     "activeTab"
   ],
