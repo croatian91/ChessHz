@@ -1,3 +1,3 @@
 $(document).ready(function () {
-    $("[name='my-checkbox']").bootstrapSwitch();
+    $("[type='checkbox']").bootstrapSwitch('size', 'mini');
 });

@@ -10,12 +10,48 @@
     <link href="css/custom.css" rel="stylesheet" media="screen">
 </head>
 <body>
-<div class="page-header">
-    <h1>ChessHz
-        <small>Settings</small>
-    </h1>
-    <input type="checkbox" name="my-checkbox" checked>
+<div class="container">
+    <div class="page-header">
+        <h1>ChessHz</h1>
+    </div>
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#settings">Settings</a></li>
+        <li><a data-toggle="tab" href="#details">User details</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="settings" class="tab-pane fade in active">
+            <div class="panel panel-default">
+                <div class="panel-heading">SETTINGS</div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <span class="label label-primary">Show the gauge</span>
+                            <input type="checkbox" name="show-gauge">
+                        </li>
+                        <li class="list-group-item">
+                            <span class="label label-primary">Show the best move</span>
+                            <input type="checkbox" name="show-best-move">
+                        </li>
+                        <li class="list-group-item">
+                            <span class="label label-primary">Show moves</span>
+                            <input type="checkbox" name="show-moves">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="details" class="tab-pane fade">
+            <div class="panel panel-default">
+                <div class="panel-heading">USER DETAILS</div>
+                <div class="panel-body">
+                    <p>No information.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
 
 <!-- Scripts -->
 <script src="js/jquery-2.2.3.min.js"></script>
