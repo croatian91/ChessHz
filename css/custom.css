@@ -6,6 +6,8 @@
 
 body {
     background-color: #eee;
+    width: 400px;
+    height: 300px;
 }
 
 .alert {
@@ -19,9 +21,13 @@ body {
 
 .form-signin {
     max-width: inherit;
-    padding: 30px 38px 66px;
+    padding: 15px 20px 15px;
     margin: 0 auto;
     background-color: #eee;
+}
+
+.social-buttons {
+    margin-bottom: 20px;
 }
 
 .form-signin-heading {

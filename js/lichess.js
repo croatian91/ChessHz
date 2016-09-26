@@ -20,8 +20,6 @@ $(document).ready(function () {
     });
 
     port.onMessage.addListener(function (msg) {
-        var hostName = "com.corehz.chrome.ctrl.mouse";
-
         var squares = ($('.cg-board').hasClass('orientation-white')) ? $('square').get() : $('square').get().reverse();
         var offset = $('square').first().width() / 2;
         var evaluation = ($(JSON.parse(msg).info)).get(0);
@@ -32,8 +30,6 @@ $(document).ready(function () {
         var f = $(squares[coords.indexOf(bestmove.from)]);
         var t = $(squares[coords.indexOf(bestmove.to)]);
 
-        $(squares).css('background-color', 'inherit');
-
         f.css("background-color", "red");
         t.css("background-color", "red");
 
@@ -41,6 +37,10 @@ $(document).ready(function () {
     });
 
     $('.moves').on('DOMNodeInserted	', function (e) {
+        var squares = $('square').get();
+
+        $(squares).css('background-color', 'inherit');
+
         if ($(e.target).hasClass('active') || $(e.target).hasClass('moves')) {
             var moves = new Array();
             var wtime = $('.clock_white > .time').text().split(':');
@@ -50,12 +50,15 @@ $(document).ready(function () {
                 moves.push($(this).text());
             });
 
-            port.postMessage(JSON.stringify({
-                job: 'getBestMove',
-                moves: moves,
-                wtime: parseInt(wtime[0]) * 60000 + parseInt(wtime[1]) * 1000,
-                btime: parseInt(btime[0]) * 60000 + parseInt(btime[1]) * 1000
-            }));
+            chrome.storage.sync.get('show-best-move', function (item) {
+                if (item['show-best-move'] === true)
+                    port.postMessage(JSON.stringify({
+                        job: 'getBestMove',
+                        moves: moves,
+                        wtime: parseInt(wtime[0]) * 60000 + parseInt(wtime[1]) * 1000,
+                        btime: parseInt(btime[0]) * 60000 + parseInt(btime[1]) * 1000
+                    }));
+            });
         }
     });
 });

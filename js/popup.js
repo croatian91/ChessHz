@@ -6,26 +6,27 @@ $(document).ready(function () {
     });
 
     $('#submit').on('click', function (e) {
-        var name = $('#username').val();
+        var login = $('#login').val();
         var pw = $('#password').val();
         var settings = {
             "async": true,
             "crossDomain": true,
-            "url": "http://localhost:3000/auth",
+            "url": "http://localhost:3000/api/auth",
             "method": "POST",
             "headers": {
                 "jsonp": false,
-                "name": name,
+                "login": name,
                 "password": pw,
                 "cache-control": "no-cache",
                 "content-type": "application/x-www-form-urlencoded"
             },
             "data": {
-                "name": name,
+                "login": login,
                 "password": pw
             },
             success: function (data, textStatus, jqXHR) {
                 if (data.success === true) {
+                    chrome.storage.sync.set({'token': data.token});
                     location.href = 'settings.html';
                     chrome.browserAction.setPopup({
                         popup: "settings.html"

@@ -28,10 +28,6 @@ $(document).ready(function () {
             decimals: (type === 'cp')
         };
 
-        $('.cell').each(function () {
-            $(this).css('background-color', 'inherit');
-        });
-
         f.css("background-color", "red");
         t.css("background-color", "red");
 
@@ -39,6 +35,10 @@ $(document).ready(function () {
     });
 
     $('.current').on('DOMNodeInserted', function (e) {
+        $('.cell').each(function () {
+            $(this).css('background-color', 'inherit');
+        });
+        
         if ($(e.target).hasClass('notiBox')) {
             var moves = new Array();
             var wtime = $('.white > .runningTime').text().split(':');
@@ -48,12 +48,16 @@ $(document).ready(function () {
                 moves.push($(this).text().replace(/[^a-zA-Z0-9+-]+/g, ''));
             });
 
-            port.postMessage(JSON.stringify({
-                job: 'getBestMove',
-                moves: moves,
-                wtime: parseInt(wtime[0]) * 60000 + parseInt(wtime[1]) * 1000,
-                btime: parseInt(btime[0]) * 60000 + parseInt(btime[1]) * 1000
-            }));
+            chrome.storage.sync.get('show-best-move', function (item) {
+                if (item['show-best-move'] === true)
+                    port.postMessage(JSON.stringify({
+                        job: 'getBestMove',
+                        moves: moves,
+                        wtime: parseInt(wtime[0]) * 60000 + parseInt(wtime[1]) * 1000,
+                        btime: parseInt(btime[0]) * 60000 + parseInt(btime[1]) * 1000
+                    }));
+            });
+
         }
     });
 });

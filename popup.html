@@ -8,7 +8,9 @@
     <title>Settings page</title>
 
     <!-- Cascading Style Sheets -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="vendors/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="vendors/font-awesome-4.6.3/css/font-awesome.min.css" rel="stylesheet" media="screen">
+    <link href="css/bootstrap-social.css" rel="stylesheet" media="screen">
     <link href="css/custom.css" rel="stylesheet" media="screen">
 </head>
 
@@ -18,18 +20,28 @@
         <form action="" method="post" name="Login_Form" class="form-signin">
             <h3 class="form-signin-heading">ChessHz - Login</h3>
             <hr class="colorgraph">
-            <br>
+            <div class="row">
+                <div class="col-xs-12 social-buttons">
+                    <a href="https://www.facebook.com/dialog/oauth?client_id=1815928481976271&redirect_uri=https://www.facebook.com/connect/login_success.html"
+                       class="btn btn-block btn-social btn-facebook">
+                        <span class="fa fa-facebook"></span> Sign in with Facebook
+                    </a>
+                    <a href="" class="btn btn-block btn-social btn-google">
+                        <span class="fa fa-google"></span> Sign in with Google
+                    </a>
+                </div>
+            </div>
             <div class="alert alert-danger" role="alert">
                 <span id="alert-msg"></span>
             </div>
 
-            <input type="text" class="form-control" name="Username" id="username" placeholder="Username"
+            <input type="text" class="form-control" name="Login" id="login" placeholder="Login"
                    autofocus=""/>
             <input type="password" class="form-control" name="Password" id="password" placeholder="Password"
                    required=""/>
 
-            <button class="btn btn-lg btn-primary btn-block" name="Submit" id="submit" value="Login" type="submit">
-                Login
+            <button class="btn btn-lg btn-primary btn-block" name="Submit" id="submit" value="Sign-in" type="submit">
+                Sign in
             </button>
             <div>
                 <a href="https://www.chesshz.top/signup/">Create account</a> or <a
@@ -37,11 +49,10 @@
             </div>
         </form>
     </div>
-</div>
 
-<!-- Scripts -->
-<script src="js/jquery-2.2.3.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/popup.js"></script>
+    <!-- Scripts -->
+    <script src="js/jquery-2.2.3.min.js"></script>
+    <script src="vendors/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="js/popup.js"></script>
 </body>
 </html>

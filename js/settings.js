@@ -1,10 +1,11 @@
 $(document).ready(function () {
     (function ($) {
-        var settings = $("[type='checkbox']");
+        var checkboxes = $("[type='checkbox']");
+        var token = '';
 
         $("[type='checkbox']").bootstrapSwitch('size', 'mini');
 
-        $.each(settings, function (index, value) {
+        $.each(checkboxes, function (index, value) {
             var setting = $(value).attr('name');
 
             chrome.storage.sync.get(setting, function (item) {
@@ -18,6 +19,32 @@ $(document).ready(function () {
 
             o[setting] = state;
             chrome.storage.sync.set(o);
+        });
+
+        chrome.storage.sync.get('token', function (item) {
+            var settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": "http://localhost:3000/member-info",
+                "method": "GET",
+                "headers": {
+                    "jsonp": false,
+                    "authorization": item['token'],
+                    "cache-control": "no-cache"
+                },
+                success: function (data, textStatus, jqXHR) {
+                    if (data.success === true) {
+                        $('#test').text(data.msg);
+                    } else {
+                        alert('error');
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+
+                }
+            };
+
+            $.ajax(settings)
         });
     })(jQuery);
 });

@@ -3,6 +3,7 @@
   "name": "ChessHz",
   "description": "Extension helping players get better on famous chess servers.",
   "version": "0.1",
+  "content_security_policy": "script-src 'self' https://connect.facebook.net; object-src 'self'",
   "browser_action": {
     "default_title": "ChessHz",
     "default_icon": "icon.png",
@@ -50,6 +51,7 @@
   "permissions": [
     "storage",
     "tabs",
+    "https://connect.facebook.net/en_US/sdk.js",
     "http://localhost:3000/auth",
     "nativeMessaging",
     "activeTab"
