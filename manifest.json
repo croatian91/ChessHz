@@ -22,7 +22,7 @@
       ],
       "js": [
         "js/jquery-2.2.3.min.js",
-        "js/chess24.js"
+        "js/chess24.com.js"
       ]
     },
     {
@@ -34,7 +34,7 @@
       ],
       "js": [
         "js/jquery-2.2.3.min.js",
-        "js/lichess.js"
+        "js/lichess.org.js"
       ]
     },
     {
@@ -43,7 +43,7 @@
       ],
       "js": [
         "js/jquery-2.2.3.min.js",
-        "js/chess.js"
+        "js/chess.com.js"
       ],
       "run_at": "document_end"
     }
