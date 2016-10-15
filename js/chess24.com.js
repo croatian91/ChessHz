@@ -16,29 +16,10 @@ $(document).ready(function () {
     });
 
     port.onMessage.addListener(function (msg) {
-        var evaluation = ($(JSON.parse(msg).info)).get(0);
-        var bestmove = JSON.parse(msg).bestResponse.moveToPlay;
-        var f = $('._' + coords[bestmove.from]);
-        var t = $('._' + coords[bestmove.to]);
-        var value = (evaluation) ? evaluation.score.value : 0;
-        var type = (evaluation) ? evaluation.score.type : 'no evaluation available';
-
-        var config = {
-            label: type,
-            decimals: (type === 'cp')
-        };
-
-        f.css("background-color", "red");
-        t.css("background-color", "red");
-
         console.log(msg);
     });
 
     $('.current').on('DOMNodeInserted', function (e) {
-        $('.cell').each(function () {
-            $(this).css('background-color', 'inherit');
-        });
-        
         if ($(e.target).hasClass('notiBox')) {
             var moves = new Array();
             var wtime = $('.white > .runningTime').text().split(':');
@@ -48,16 +29,24 @@ $(document).ready(function () {
                 moves.push($(this).text().replace(/[^a-zA-Z0-9+-]+/g, ''));
             });
 
-            chrome.storage.sync.get('show-best-move', function (item) {
-                if (item['show-best-move'] === true)
-                    port.postMessage(JSON.stringify({
-                        job: 'getBestMove',
-                        moves: moves,
-                        wtime: parseInt(wtime[0]) * 60000 + parseInt(wtime[1]) * 1000,
-                        btime: parseInt(btime[0]) * 60000 + parseInt(btime[1]) * 1000
-                    }));
-            });
+            port.postMessage(JSON.stringify({
+                job: 'analyze',
+                moves: moves,
+                wtime: parseInt(wtime[0]) * 60000 + parseInt(wtime[1]) * 1000,
+                btime: parseInt(btime[0]) * 60000 + parseInt(btime[1]) * 1000
+            }));
+
+            // chrome.storage.sync.get('show-best-move', function (item) {
+            //     if (item['show-best-move'] === true)
+            //         port.postMessage(JSON.stringify({
+            //             job: 'analyse',
+            //             moves: moves,
+            //             wtime: parseInt(wtime[0]) * 60000 + parseInt(wtime[1]) * 1000,
+            //             btime: parseInt(btime[0]) * 60000 + parseInt(btime[1]) * 1000
+            //         }));
+            // });
 
         }
     });
+    console.log('CoreHz - Injection completed. Have fun!');
 });

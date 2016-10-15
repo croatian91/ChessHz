@@ -23,7 +23,8 @@
       "js": [
         "js/jquery-2.2.3.min.js",
         "js/chess24.com.js"
-      ]
+      ],
+      "run_at": "document_end"
     },
     {
       "matches": [
@@ -35,11 +36,12 @@
       "js": [
         "js/jquery-2.2.3.min.js",
         "js/lichess.org.js"
-      ]
+      ],
+      "run_at": "document_end"
     },
     {
       "matches": [
-        "https://live.chess.com/live?v=*"
+        "https://www.chess.com/live*"
       ],
       "js": [
         "js/jquery-2.2.3.min.js",
@@ -51,12 +53,15 @@
   "permissions": [
     "storage",
     "tabs",
-    "https://connect.facebook.net/en_US/sdk.js",
+    "identity",
+    "https://www.facebook.com/",
+    "https://graph.facebook.com/",
     "http://localhost:3000/auth",
     "nativeMessaging",
     "activeTab"
   ],
   "web_accessible_resources": [
-    "gauge.html"
+    "gauge.html",
+    "status.html"
   ]
 }

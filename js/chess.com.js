@@ -7,38 +7,28 @@ $(document).ready(function () {
 
     port.onMessage.addListener(function (msg) {
         console.log(msg);
+        //$('span#ChessHz-message').text(msg);
     });
 
-    $(document).on('DOMNodeInserted', function (e) {
-        if ($(e.target).is('.boardContainer')) {
-            $('.moves_controls').on('DOMNodeInserted', function (e) {
-                var moves = [];
+    // $.get(chrome.extension.getURL('/status.html'), function (data) {
+    //     $('#LiveChessMainContainer').prepend(data);
+    // });
 
-                $('.gotomove').each(function () {
-                    moves.push($(this).text());
-                });
+    $('#LiveChessTopSideBarTabset .tab-content').on('DOMNodeInserted', function (e) {
+        if ($(e.target).hasClass('move-timestamp')) {
+            var moves = [];
 
-                console.log(moves);
-
-                port.postMessage(JSON.stringify({job: 'getBestMove', moves: moves}));
+            $('.gotomove').filter(function () {
+                return $(this).text().length > 0;
+            }).each(function () {
+                moves.push($(this).text());
             });
+
+            //console.log(moves);
+
+            port.postMessage(JSON.stringify({job: 'analyze', moves: moves}));
         }
     });
-
-    /*function f() {
-     console.log('dfsdfsd');
-     $('.moves_controls').on('DOMNodeInserted', function (e) {
-     var moves = [];
-
-     $('.gotomove').each(function () {
-     moves.push($(this).text());
-     });
-
-     console.log(moves);
-
-     //port.postMessage(JSON.stringify({job: 'getBestMove', moves: moves}));
-     });
-     }
-
-     $(".boardContainer").on("DOMNodeInserted", f);*/
-});
+    console.log('CoreHz - Injection completed. Have fun!');
+})
+;

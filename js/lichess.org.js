@@ -15,51 +15,81 @@ $(document).ready(function () {
         'a1', 'b1', 'c1', 'd1', 'e1', 'f1', 'g1', 'h1'
     ];
 
-    $.get(chrome.extension.getURL('/gauge.html'), function (data) {
-        $(data).appendTo('.lichess_ground');
-    });
+    function milli(time) {
+        return (time && time.length > 1) ? (time[0] * 60000 + parseInt(time[1]) * 1000) : null;
+    }
 
-    port.onMessage.addListener(function (msg) {
-        var squares = ($('.cg-board').hasClass('orientation-white')) ? $('square').get() : $('square').get().reverse();
-        var offset = $('square').first().width() / 2;
-        var evaluation = ($(JSON.parse(msg).info)).get(0);
-        var bestmove = JSON.parse(msg).bestResponse.moveToPlay;
-        var value = (evaluation) ? evaluation.score.value : 0;
-        var type = (evaluation) ? evaluation.score.type : 'no evaluation';
+    function pgn() {
+        var moves = [];
+        var wname = $('.username.white').text().replace(/ (.*?)$/g, '');
+        var bname = $('.username.black').text().replace(/ (.*?)$/g, '');
 
-        var f = $(squares[coords.indexOf(bestmove.from)]);
-        var t = $(squares[coords.indexOf(bestmove.to)]);
+        $('turn').filter(function () {
+            return $(this).text().length > 0;
+        }).each(function () {
+            moves.push($('index', this).text() + '.' +
+                $('move', this).first().text() + ' ' +
+                $('move', this).last().text());
+        });
 
-        f.css("background-color", "red");
-        t.css("background-color", "red");
+        return [
+            '[Event "Casual Game"]',
+            '[Site "Lichess.org"]',
+            '[Date ""]',
+            '[Round "?"]',
+            '[Result "*"]',
+            '[White "' + wname + '"]',
+            '[Black "' + bname + '"]',
+            '[WhiteElo "?"]',
+            '[BlackElo "?"]',
+            '',
+            moves.join(' ')
+        ].join('\n');
+    }
 
-        console.log(msg);
+    // $.get(chrome.extension.getURL('/gauge.html'), function (data) {
+    //     $(data).appendTo('.lichess_ground');
+    // });
+
+    port.onMessage.addListener(function (response) {
+        //var squares = ($('.cg-board').hasClass('orientation-white')) ? $('square').get() : $('square').get().reverse();
+        var info = JSON.parse(response).info;
+
+        console.log(info);
     });
 
     $('.moves').on('DOMNodeInserted	', function (e) {
-        var squares = $('square').get();
-
-        $(squares).css('background-color', 'inherit');
-
-        if ($(e.target).hasClass('active') || $(e.target).hasClass('moves')) {
-            var moves = new Array();
+        if ($(e.target).hasClass('result')) {
+            console.log('Game Over');
+        } else if ($(e.target).is('move.active, div.moves')) {
+            var moves = [];
             var wtime = $('.clock_white > .time').text().split(':');
             var btime = $('.clock_black > .time').text().split(':');
 
-            $('move').each(function () {
+            $('move').filter(function () {
+                return $(this).text().length > 0;
+            }).each(function () {
                 moves.push($(this).text());
             });
 
-            chrome.storage.sync.get('show-best-move', function (item) {
-                if (item['show-best-move'] === true)
-                    port.postMessage(JSON.stringify({
-                        job: 'getBestMove',
-                        moves: moves,
-                        wtime: parseInt(wtime[0]) * 60000 + parseInt(wtime[1]) * 1000,
-                        btime: parseInt(btime[0]) * 60000 + parseInt(btime[1]) * 1000
-                    }));
-            });
+            port.postMessage(JSON.stringify({
+                job: 'analyze',
+                moves: moves,
+                wtime: parseInt(milli(wtime)),
+                btime: parseInt(milli(btime))
+            }));
+
+            // chrome.storage.sync.get('show-best-move', function (item) {
+            //     if (item['show-best-move'] === true)
+            //         port.postMessage(JSON.stringify({
+            //             job: 'analyse',
+            //             moves: moves,
+            //             wtime: parseInt(milli(wtime)),
+            //             btime: parseInt(milli(btime))
+            //         }));
+            // });
         }
     });
+    console.log('CoreHz - Injection completed. Have fun!');
 });
 
