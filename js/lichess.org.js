@@ -63,7 +63,7 @@ $(document).ready(function () {
 
     $('.moves').on('DOMNodeInserted	', function (e) {
         if ($(e.target).hasClass('result')) {
-            console.log('Game Over');
+            $('span#ChessHz-message').text('Game Over');
         } else if ($(e.target).is('move.active, div.moves')) {
             var moves = [];
             var wtime = $('.clock_white > .time').text().split(':');
