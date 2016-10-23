@@ -15,7 +15,7 @@ $(document).ready(function () {
         return (time && time.length > 1) ? (time[0] * 60000 + parseInt(time[1]) * 1000) : null;
     }
 
-    $.get(chrome.extension.getURL('/gauge.html'), function (data) {
+    $.get(chrome.extension.getURL('/status.html'), function (data) {
         $(data).appendTo('.gameInformation');
     });
 

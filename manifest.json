@@ -61,7 +61,6 @@
     "activeTab"
   ],
   "web_accessible_resources": [
-    "gauge.html",
     "status.html"
   ]
 }

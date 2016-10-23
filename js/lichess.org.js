@@ -15,6 +15,10 @@ $(document).ready(function () {
         'a1', 'b1', 'c1', 'd1', 'e1', 'f1', 'g1', 'h1'
     ];
 
+    $.get(chrome.extension.getURL('/status.html'), function (data) {
+        $('.lichess_ground > div:first-child').before(data);
+    });
+    
     function milli(time) {
         return (time && time.length > 1) ? (time[0] * 60000 + parseInt(time[1]) * 1000) : null;
     }
@@ -23,10 +27,6 @@ $(document).ready(function () {
         var squares = ($('.cg-board').hasClass('orientation-white')) ? $('square').get() : $('square').get().reverse();
 
         console.log(response);
-    });
-
-    $.get(chrome.extension.getURL('/status.html'), function (data) {
-        $('.lichess_ground > div:first-child').before(data);
     });
 
     $('.moves').on('DOMNodeInserted	', function (e) {
