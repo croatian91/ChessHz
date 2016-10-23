@@ -89,8 +89,8 @@
       <file leaf-file-name="chess24.com.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/chess24.com.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="39" column="45" selection-start-line="39" selection-start-column="45" selection-end-line="39" selection-end-column="45" />
+            <state relative-caret-position="140">
+              <caret line="34" column="33" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -384,7 +384,7 @@
       <workItem from="1476492571238" duration="1174000" />
       <workItem from="1476494756758" duration="2137000" />
       <workItem from="1477216820865" duration="5467000" />
-      <workItem from="1477224818914" duration="2643000" />
+      <workItem from="1477224818914" duration="2791000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1456844392052</created>
@@ -631,11 +631,18 @@
       <option name="project" value="LOCAL" />
       <updated>1477227286111</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="milli function added">
+      <created>1477227575150</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1477227575150</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="198023000" />
+    <option name="totallyTimeSpent" value="198171000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="30" width="1366" height="738" extended-state="0" />
@@ -672,7 +679,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="New move event fixed for lichess" />
     <MESSAGE value="FIX move detection for lichess" />
     <MESSAGE value="onmessage working" />
     <MESSAGE value="highlight squares bestmove" />
@@ -697,7 +703,8 @@
     <MESSAGE value="refactored code" />
     <MESSAGE value="added status html file" />
     <MESSAGE value="few fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="few fixes" />
+    <MESSAGE value="milli function added" />
+    <option name="LAST_COMMIT_MESSAGE" value="milli function added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -941,8 +948,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/chess24.com.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="39" column="45" selection-start-line="39" selection-start-column="45" selection-end-line="39" selection-end-column="45" />
+        <state relative-caret-position="140">
+          <caret line="34" column="33" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="33" />
           <folding />
         </state>
       </provider>

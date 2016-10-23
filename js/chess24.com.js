@@ -30,7 +30,9 @@ $(document).ready(function () {
             var btime = $('.black > .runningTime').text().split(':');
 
             $('.move').each(function () {
-                moves.push($(this).text().replace(/[^a-zA-Z0-9+-]+/g, ''));
+                var move = $(this).text().replace(/[^a-zA-Z0-9+-]+/g, '');
+
+                moves.push(move);
             });
 
             port.postMessage(JSON.stringify({
