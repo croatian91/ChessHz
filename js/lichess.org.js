@@ -19,43 +19,46 @@ $(document).ready(function () {
         return (time && time.length > 1) ? (time[0] * 60000 + parseInt(time[1]) * 1000) : null;
     }
 
-    function pgn() {
-        var moves = [];
-        var wname = $('.username.white').text().replace(/ (.*?)$/g, '');
-        var bname = $('.username.black').text().replace(/ (.*?)$/g, '');
-
-        $('turn').filter(function () {
-            return $(this).text().length > 0;
-        }).each(function () {
-            moves.push($('index', this).text() + '.' +
-                $('move', this).first().text() + ' ' +
-                $('move', this).last().text());
-        });
-
-        return [
-            '[Event "Casual Game"]',
-            '[Site "Lichess.org"]',
-            '[Date ""]',
-            '[Round "?"]',
-            '[Result "*"]',
-            '[White "' + wname + '"]',
-            '[Black "' + bname + '"]',
-            '[WhiteElo "?"]',
-            '[BlackElo "?"]',
-            '',
-            moves.join(' ')
-        ].join('\n');
-    }
+    // function pgn() {
+    //     var moves = [];
+    //     var wname = $('.username.white').text().replace(/ (.*?)$/g, '');
+    //     var bname = $('.username.black').text().replace(/ (.*?)$/g, '');
+    //
+    //     $('turn').filter(function () {
+    //         return $(this).text().length > 0;
+    //     }).each(function () {
+    //         moves.push($('index', this).text() + '.' +
+    //             $('move', this).first().text() + ' ' +
+    //             $('move', this).last().text());
+    //     });
+    //
+    //     return [
+    //         '[Event "Casual Game"]',
+    //         '[Site "Lichess.org"]',
+    //         '[Date ""]',
+    //         '[Round "?"]',
+    //         '[Result "*"]',
+    //         '[White "' + wname + '"]',
+    //         '[Black "' + bname + '"]',
+    //         '[WhiteElo "?"]',
+    //         '[BlackElo "?"]',
+    //         '',
+    //         moves.join(' ')
+    //     ].join('\n');
+    // }
 
     // $.get(chrome.extension.getURL('/gauge.html'), function (data) {
     //     $(data).appendTo('.lichess_ground');
     // });
 
     port.onMessage.addListener(function (response) {
-        //var squares = ($('.cg-board').hasClass('orientation-white')) ? $('square').get() : $('square').get().reverse();
-        var info = JSON.parse(response).info;
+        var squares = ($('.cg-board').hasClass('orientation-white')) ? $('square').get() : $('square').get().reverse();
 
-        console.log(info);
+        console.log(response);
+    });
+
+    $.get(chrome.extension.getURL('/status.html'), function (data) {
+        $('.lichess_ground > div:first-child').before(data);
     });
 
     $('.moves').on('DOMNodeInserted	', function (e) {
@@ -69,14 +72,15 @@ $(document).ready(function () {
             $('move').filter(function () {
                 return $(this).text().length > 0;
             }).each(function () {
-                moves.push($(this).text());
+                var move = $(this).text().replace('O-O+', 'O-O').replace('х', 'x');
+                moves.push(move);
             });
 
             port.postMessage(JSON.stringify({
-                job: 'analyze',
-                moves: moves,
-                wtime: parseInt(milli(wtime)),
-                btime: parseInt(milli(btime))
+                'job': 'analyze',
+                'moves': moves,
+                'wtime': parseInt(milli(wtime)),
+                'btime': parseInt(milli(btime))
             }));
 
             // chrome.storage.sync.get('show-best-move', function (item) {
