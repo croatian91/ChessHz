@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1bd96c1c-65d2-446c-befc-80eac669d918" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/chess.com.js" afterPath="$PROJECT_DIR$/js/chess.com.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/lichess.org.js" afterPath="$PROJECT_DIR$/js/lichess.org.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/status.html" afterPath="$PROJECT_DIR$/status.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/chess24.com.js" afterPath="$PROJECT_DIR$/js/chess24.com.js" />
     </list>
     <ignored path="ChessHook.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -36,11 +34,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="lichess.org.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="lichess.org.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/lichess.org.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="60" column="60" selection-start-line="60" selection-start-column="60" selection-end-line="60" selection-end-column="60" />
+            <state relative-caret-position="323">
+              <caret line="19" column="5" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -88,11 +86,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="chess24.com.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="chess24.com.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/chess24.com.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="32" column="28" selection-start-line="32" selection-start-column="28" selection-end-line="32" selection-end-column="28" />
+            <state relative-caret-position="306">
+              <caret line="39" column="45" selection-start-line="39" selection-start-column="45" selection-end-line="39" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -103,16 +101,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="40" selection-start-line="0" selection-start-column="40" selection-end-line="0" selection-end-column="40" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="settings.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/settings.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="680">
-              <caret line="40" column="87" selection-start-line="40" selection-start-column="87" selection-end-line="40" selection-end-column="87" />
               <folding />
             </state>
           </provider>
@@ -133,8 +121,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="HTML File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -172,11 +160,12 @@
         <option value="$PROJECT_DIR$/settings.html" />
         <option value="$PROJECT_DIR$/popup.html" />
         <option value="$PROJECT_DIR$/js/main.js" />
-        <option value="$PROJECT_DIR$/js/chess24.com.js" />
         <option value="$PROJECT_DIR$/manifest.json" />
         <option value="$PROJECT_DIR$/status.html" />
         <option value="$PROJECT_DIR$/js/chess.com.js" />
+        <option value="$PROJECT_DIR$/js/utils.js" />
         <option value="$PROJECT_DIR$/js/lichess.org.js" />
+        <option value="$PROJECT_DIR$/js/chess24.com.js" />
       </list>
     </option>
   </component>
@@ -395,7 +384,7 @@
       <workItem from="1476492571238" duration="1174000" />
       <workItem from="1476494756758" duration="2137000" />
       <workItem from="1477216820865" duration="5467000" />
-      <workItem from="1477224818914" duration="2346000" />
+      <workItem from="1477224818914" duration="2643000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1456844392052</created>
@@ -635,11 +624,18 @@
       <option name="project" value="LOCAL" />
       <updated>1476492298997</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="few fixes">
+      <created>1477227286111</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1477227286111</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="197726000" />
+    <option name="totallyTimeSpent" value="198023000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="30" width="1366" height="738" extended-state="0" />
@@ -676,7 +672,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ADD playchess.js file &#10;FIX detection new move lichess" />
     <MESSAGE value="New move event fixed for lichess" />
     <MESSAGE value="FIX move detection for lichess" />
     <MESSAGE value="onmessage working" />
@@ -701,20 +696,14 @@
     <MESSAGE value="rename files" />
     <MESSAGE value="refactored code" />
     <MESSAGE value="added status html file" />
-    <option name="LAST_COMMIT_MESSAGE" value="added status html file" />
+    <MESSAGE value="few fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="few fixes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="6" selection-start-line="0" selection-start-column="6" selection-end-line="0" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/popup.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -892,14 +881,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/chess24.com.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="32" column="28" selection-start-line="32" selection-start-column="28" selection-end-line="32" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/main.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -942,10 +923,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/js/utils.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/js/lichess.org.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="60" column="60" selection-start-line="60" selection-start-column="60" selection-end-line="60" selection-end-column="60" />
+        <state relative-caret-position="323">
+          <caret line="19" column="5" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/chess24.com.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="39" column="45" selection-start-line="39" selection-start-column="45" selection-end-line="39" selection-end-column="45" />
           <folding />
         </state>
       </provider>

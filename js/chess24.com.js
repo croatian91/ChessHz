@@ -11,6 +11,10 @@ $(document).ready(function () {
         'h8': '77', 'h7': '67', 'h6': '57', 'h5': '47', 'h4': '37', 'h3': '27', 'h2': '17', 'h1': '07'
     };
 
+    function milli(time) {
+        return (time && time.length > 1) ? (time[0] * 60000 + parseInt(time[1]) * 1000) : null;
+    }
+
     $.get(chrome.extension.getURL('/gauge.html'), function (data) {
         $(data).appendTo('.gameInformation');
     });
@@ -32,8 +36,8 @@ $(document).ready(function () {
             port.postMessage(JSON.stringify({
                 job: 'analyze',
                 moves: moves,
-                wtime: parseInt(wtime[0]) * 60000 + parseInt(wtime[1]) * 1000,
-                btime: parseInt(btime[0]) * 60000 + parseInt(btime[1]) * 1000
+                wtime: parseInt(milli(wtime)),
+                btime: parseInt(milli(btime))
             }));
 
             // chrome.storage.sync.get('show-best-move', function (item) {
