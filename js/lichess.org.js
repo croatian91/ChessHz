@@ -19,38 +19,6 @@ $(document).ready(function () {
         return (time && time.length > 1) ? (time[0] * 60000 + parseInt(time[1]) * 1000) : null;
     }
 
-    // function pgn() {
-    //     var moves = [];
-    //     var wname = $('.username.white').text().replace(/ (.*?)$/g, '');
-    //     var bname = $('.username.black').text().replace(/ (.*?)$/g, '');
-    //
-    //     $('turn').filter(function () {
-    //         return $(this).text().length > 0;
-    //     }).each(function () {
-    //         moves.push($('index', this).text() + '.' +
-    //             $('move', this).first().text() + ' ' +
-    //             $('move', this).last().text());
-    //     });
-    //
-    //     return [
-    //         '[Event "Casual Game"]',
-    //         '[Site "Lichess.org"]',
-    //         '[Date ""]',
-    //         '[Round "?"]',
-    //         '[Result "*"]',
-    //         '[White "' + wname + '"]',
-    //         '[Black "' + bname + '"]',
-    //         '[WhiteElo "?"]',
-    //         '[BlackElo "?"]',
-    //         '',
-    //         moves.join(' ')
-    //     ].join('\n');
-    // }
-
-    // $.get(chrome.extension.getURL('/gauge.html'), function (data) {
-    //     $(data).appendTo('.lichess_ground');
-    // });
-
     port.onMessage.addListener(function (response) {
         var squares = ($('.cg-board').hasClass('orientation-white')) ? $('square').get() : $('square').get().reverse();
 
@@ -73,6 +41,7 @@ $(document).ready(function () {
                 return $(this).text().length > 0;
             }).each(function () {
                 var move = $(this).text().replace('O-O+', 'O-O').replace('х', 'x');
+
                 moves.push(move);
             });
 
