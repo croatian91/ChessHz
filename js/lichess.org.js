@@ -3,7 +3,11 @@
  */
 
 $(document).ready(function () {
+    const MIN = -10.0;
+    const MAX = 10.0;
+
     var port = chrome.runtime.connect({name: "easy-chess"});
+    var gauge = null;
     var coords = [
         'a8', 'b8', 'c8', 'd8', 'e8', 'f8', 'g8', 'h8',
         'a7', 'b7', 'c7', 'd7', 'e7', 'f7', 'g7', 'h7',
@@ -16,17 +20,61 @@ $(document).ready(function () {
     ];
 
     $.get(chrome.extension.getURL('/status.html'), function (data) {
-        $('.lichess_ground > div:first-child').before(data);
+        $('.table_wrap > div:last-child').before(data);
+
+        gauge = new JustGage({
+            id: "gauge",
+            value: 0.0,
+            min: MIN,
+            max: MAX,
+            reverse: true,
+            title: "Evaluation",
+            gaugeColor: '#FFFFFF',
+            levelColors: ['#000000'],
+            refreshAnimationTime: 150,
+            decimals: 2
+        });
+
+        gauge.txtMin.attr({
+            "text": MIN
+        });
+
+        gauge.txtMax.attr({
+            "text": MAX
+        });
     });
-    
+
     function milli(time) {
         return (time && time.length > 1) ? (time[0] * 60000 + parseInt(time[1]) * 1000) : null;
     }
 
-    port.onMessage.addListener(function (response) {
+    port.onMessage.addListener(function (data) {
         var squares = ($('.cg-board').hasClass('orientation-white')) ? $('square').get() : $('square').get().reverse();
+        var response = JSON.parse(data);
 
         console.log(response);
+
+        if (response &&
+            response.hasOwnProperty('info') &&
+            response.hasOwnProperty('turn') &&
+            response.info.length > 0) {
+            var turn = (response.turn === 'w') ? 1 : -1;
+            var type = response.info[0].score.type;
+            var val = (type === 'cp') ? response.info[0].score.value * turn / 100 : ((turn > 0) ? MAX : MIN);
+
+            gauge.refresh(val);
+
+            if (type === 'mate')
+                gauge.txtValue.attr({
+                    "text": response.info[0].score.value
+                });
+
+            gauge.txtLabel.attr({
+                "text": type
+            });
+
+            $('span#ChessHz-message').text('Best move: ' + response.info[0].pv[0]);
+        }
     });
 
     $('.moves').on('DOMNodeInserted	', function (e) {
