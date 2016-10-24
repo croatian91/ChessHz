@@ -108,8 +108,14 @@ $(document).ready(function () {
         });
     }
 
-    port.onMessage.addListener(function (data) {
-        var response = JSON.parse(data);
+    /**
+     * @param data.info.score.value
+     * @param data.info.score.type
+     * @param data.info.pv
+     * @param data.turn
+     */
+    port.onMessage.addListener(function (message) {
+        var response = JSON.parse(message);
 
         if (response &&
             response.hasOwnProperty('info') &&
