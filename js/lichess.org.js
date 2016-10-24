@@ -8,16 +8,24 @@ $(document).ready(function () {
 
     var port = chrome.runtime.connect({name: "easy-chess"});
     var gauge = null;
-    var coords = [
-        'a8', 'b8', 'c8', 'd8', 'e8', 'f8', 'g8', 'h8',
-        'a7', 'b7', 'c7', 'd7', 'e7', 'f7', 'g7', 'h7',
-        'a6', 'b6', 'c6', 'd6', 'e6', 'f6', 'g6', 'h6',
-        'a5', 'b5', 'c5', 'd5', 'e5', 'f5', 'g5', 'h5',
-        'a4', 'b4', 'c4', 'd4', 'e4', 'f4', 'g4', 'h4',
-        'a3', 'b3', 'c3', 'd3', 'e3', 'f3', 'g3', 'h3',
-        'a2', 'b2', 'c2', 'd2', 'e2', 'f2', 'g2', 'h2',
-        'a1', 'b1', 'c1', 'd1', 'e1', 'f1', 'g1', 'h1'
-    ];
+    var board = $('.top .cg-board');
+
+    var fromSquare = $('<div>', {
+        'id': 'ChessHz-square-from',
+        'style': 'position: absolute; ' +
+        'z-index: 1; ' +
+        'opacity: 0.7; ' +
+        'background-color: #7ef502;'
+    }), toSquare = $('<div>', {
+        'id': 'ChessHz-square-to',
+        'style': 'position: absolute; ' +
+        'z-index: 1; ' +
+        'opacity: 0.7; ' +
+        'background-color: #f55252;'
+    });
+
+    fromSquare.appendTo(board);
+    toSquare.appendTo(board);
 
     $.get(chrome.extension.getURL('/status.html'), function (data) {
         $('.table_wrap > div:last-child').before(data);
@@ -48,8 +56,40 @@ $(document).ready(function () {
         return (time && time.length > 1) ? (time[0] * 60000 + parseInt(time[1]) * 1000) : null;
     }
 
+    function offset(a, b, size) {
+        var letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+        var numbers = ['8', '7', '6', '5', '4', '3', '2', '1'];
+
+        return ($('.top .cg-board').hasClass('orientation-white')) ?
+        {top: numbers.indexOf(a) * size, left: letters.indexOf(b) * size} :
+        {top: numbers.reverse().indexOf(a) * size, left: letters.reverse().indexOf(b) * size};
+    }
+
+    function highlightSquares(from, to) {
+        var size = $('square').first().width();
+        var fromOffset = offset(from.substring(1, 2), from.substring(0, 1), size);
+        var toOffset = offset(to.substring(1, 2), to.substring(0, 1), size);
+
+        fromSquare.parent().css({position: 'relative'});
+        fromSquare.css({
+            top: fromOffset.top,
+            left: fromOffset.left,
+            width: size,
+            height: size,
+            position: 'absolute'
+        });
+
+        toSquare.parent().css({position: 'relative'});
+        toSquare.css({
+            top: toOffset.top,
+            left: toOffset.left,
+            width: size,
+            height: size,
+            position: 'absolute'
+        });
+    }
+
     port.onMessage.addListener(function (data) {
-        var squares = ($('.cg-board').hasClass('orientation-white')) ? $('square').get() : $('square').get().reverse();
         var response = JSON.parse(data);
 
         console.log(response);
@@ -61,6 +101,8 @@ $(document).ready(function () {
             var turn = (response.turn === 'w') ? 1 : -1;
             var type = response.info[0].score.type;
             var val = (type === 'cp') ? response.info[0].score.value * turn / 100 : ((turn > 0) ? MAX : MIN);
+            var from = response.info[0].pv[0].substring(0, 2);
+            var to = response.info[0].pv[0].substring(2, 4);
 
             gauge.refresh(val);
 
@@ -72,6 +114,8 @@ $(document).ready(function () {
             gauge.txtLabel.attr({
                 "text": type
             });
+
+            highlightSquares(from, to);
 
             $('span#ChessHz-message').text('Best move: ' + response.info[0].pv[0]);
         }
