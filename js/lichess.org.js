@@ -92,8 +92,6 @@ $(document).ready(function () {
     port.onMessage.addListener(function (data) {
         var response = JSON.parse(data);
 
-        console.log(response);
-
         if (response &&
             response.hasOwnProperty('info') &&
             response.hasOwnProperty('turn') &&
@@ -103,6 +101,8 @@ $(document).ready(function () {
             var val = (type === 'cp') ? response.info[0].score.value * turn / 100 : ((turn > 0) ? MAX : MIN);
             var from = response.info[0].pv[0].substring(0, 2);
             var to = response.info[0].pv[0].substring(2, 4);
+
+            console.log(response);
 
             gauge.refresh(val);
 
