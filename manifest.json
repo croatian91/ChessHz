@@ -47,6 +47,8 @@
       ],
       "js": [
         "js/jquery-2.2.3.min.js",
+        "vendors/justgage-1.2.2/raphael-2.1.4.min.js",
+        "vendors/justgage-1.2.2/justgage.js",
         "js/chess.com.js"
       ],
       "run_at": "document_end"
