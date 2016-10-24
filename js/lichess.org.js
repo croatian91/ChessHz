@@ -79,7 +79,7 @@ $(document).ready(function () {
 
     $('.moves').on('DOMNodeInserted	', function (e) {
         if ($(e.target).hasClass('result')) {
-            $('span#ChessHz-message').text('Game Over');
+            $('span#ChessHz-message').text('Best move: none');
         } else if ($(e.target).is('move.active, div.moves')) {
             var moves = [];
             var wtime = $('.clock_white > .time').text().split(':');
