@@ -52,23 +52,42 @@ $(document).ready(function () {
         });
     });
 
+    /**
+     * Converts time in milliseconds.
+     *
+     * @param time
+     * @returns {*} time in milliseconds or null.
+     */
     function milli(time) {
         return (time && time.length > 1) ? (time[0] * 60000 + parseInt(time[1]) * 1000) : null;
     }
 
-    function offset(a, b, size) {
+    /**
+     * Returns the offset of the square and its size given.
+     *
+     * @param letter
+     * @param number
+     * @param size
+     * @returns {{top: number, left: number}}
+     */
+    function offset(letter, number, size) {
         var letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
         var numbers = ['8', '7', '6', '5', '4', '3', '2', '1'];
 
         return ($('.top .cg-board').hasClass('orientation-white')) ?
-        {top: numbers.indexOf(a) * size, left: letters.indexOf(b) * size} :
-        {top: numbers.reverse().indexOf(a) * size, left: letters.reverse().indexOf(b) * size};
+        {top: numbers.indexOf(number) * size, left: letters.indexOf(letter) * size} :
+        {top: numbers.reverse().indexOf(number) * size, left: letters.reverse().indexOf(letter) * size};
     }
 
+    /**
+     *
+     * @param from initial square
+     * @param to final square
+     */
     function highlightSquares(from, to) {
         var size = $('square').first().width();
-        var fromOffset = offset(from.substring(1, 2), from.substring(0, 1), size);
-        var toOffset = offset(to.substring(1, 2), to.substring(0, 1), size);
+        var fromOffset = offset(from.substring(0, 1), from.substring(1, 2), size);
+        var toOffset = offset(to.substring(0, 1), to.substring(1, 2), size);
 
         fromSquare.parent().css({position: 'relative'});
         fromSquare.css({
