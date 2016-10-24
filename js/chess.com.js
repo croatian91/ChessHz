@@ -1,7 +1,3 @@
-/**
- * Created by croatian91 on 24/03/16.
- */
-
 $(document).ready(function () {
     var port = chrome.runtime.connect({name: "easy-chess"});
     var gauge = null;
@@ -61,7 +57,7 @@ $(document).ready(function () {
         }
     });
 
-    $('#LiveChessTopSideBarTabset .tab-content').on('DOMNodeInserted', function (e) {
+    $('#LiveChessTopSideBarTabset').find('.tab-content').on('DOMNodeInserted', function (e) {
         if ($(e.target).hasClass('move-timestamp')) {
             var moves = [];
 
