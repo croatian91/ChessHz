@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1bd96c1c-65d2-446c-befc-80eac669d918" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/popup.js" afterPath="$PROJECT_DIR$/js/popup.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/settings.js" afterPath="$PROJECT_DIR$/js/settings.js" />
     </list>
     <ignored path="ChessHook.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -44,11 +44,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="settings.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/settings.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="63" selection-start-line="5" selection-start-column="63" selection-end-line="5" selection-end-column="63" />
+            <state relative-caret-position="259">
+              <caret line="34" column="42" selection-start-line="34" selection-start-column="42" selection-end-line="34" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -64,7 +64,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="popup.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="popup.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/popup.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="205">
@@ -164,7 +164,6 @@
         <option value="$PROJECT_DIR$/js/bootstrap-slider.min.js" />
         <option value="$PROJECT_DIR$/js/lichess.js" />
         <option value="$PROJECT_DIR$/js/chess24.js" />
-        <option value="$PROJECT_DIR$/js/settings.js" />
         <option value="$PROJECT_DIR$/css/custom.css" />
         <option value="$PROJECT_DIR$/settings.html" />
         <option value="$PROJECT_DIR$/popup.html" />
@@ -177,6 +176,7 @@
         <option value="$PROJECT_DIR$/js/lichess.org.js" />
         <option value="$PROJECT_DIR$/js/main.js" />
         <option value="$PROJECT_DIR$/js/popup.js" />
+        <option value="$PROJECT_DIR$/js/settings.js" />
       </list>
     </option>
   </component>
@@ -455,14 +455,7 @@
       <workItem from="1477274264782" duration="734000" />
       <workItem from="1477312380232" duration="2260000" />
       <workItem from="1477322923401" duration="14647000" />
-      <workItem from="1477342966675" duration="3251000" />
-    </task>
-    <task id="LOCAL-00001" summary="Initial commit">
-      <created>1456844392052</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1456844392052</updated>
+      <workItem from="1477342966675" duration="3347000" />
     </task>
     <task id="LOCAL-00002" summary="ADD .gitignore file">
       <created>1456844492565</created>
@@ -800,11 +793,18 @@
       <option name="project" value="LOCAL" />
       <updated>1477345981677</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="added comments">
+      <created>1477346224809</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1477346224810</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="244339000" />
+    <option name="totallyTimeSpent" value="244435000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="30" width="1366" height="738" extended-state="0" />
@@ -864,9 +864,9 @@
     <MESSAGE value="gauge support added" />
     <MESSAGE value="squares highlighting implemented" />
     <MESSAGE value="moved console.log(response)" />
-    <MESSAGE value="added comments" />
     <MESSAGE value="removed unused stuff" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed unused stuff" />
+    <MESSAGE value="added comments" />
+    <option name="LAST_COMMIT_MESSAGE" value="added comments" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1018,14 +1018,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/settings.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="63" selection-start-line="5" selection-start-column="63" selection-end-line="5" selection-end-column="63" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/popup.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="935">
@@ -1097,6 +1089,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="205">
           <caret line="16" column="16" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/settings.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="34" column="42" selection-start-line="34" selection-start-column="42" selection-end-line="34" selection-end-column="42" />
           <folding />
         </state>
       </provider>

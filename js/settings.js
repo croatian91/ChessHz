@@ -3,7 +3,7 @@ $(document).ready(function () {
         var checkboxes = $("[type='checkbox']");
         var token = '';
 
-        $("[type='checkbox']").bootstrapSwitch('size', 'mini');
+        checkboxes.bootstrapSwitch('size', 'mini');
 
         $.each(checkboxes, function (index, value) {
             var setting = $(value).attr('name');
@@ -13,7 +13,7 @@ $(document).ready(function () {
             });
         });
 
-        $("[type='checkbox']").on('switchChange.bootstrapSwitch', function (event, state) {
+        checkboxes.on('switchChange.bootstrapSwitch', function (event, state) {
             var setting = $(this).attr('name');
             var o = {};
 
@@ -32,7 +32,7 @@ $(document).ready(function () {
                     "authorization": item['token'],
                     "cache-control": "no-cache"
                 },
-                success: function (data, textStatus, jqXHR) {
+                success: function (data) {
                     if (data.success === true) {
                         $('#test').text(data.msg);
                     } else {
