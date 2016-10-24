@@ -24,7 +24,12 @@ $(document).ready(function () {
                 "login": login,
                 "password": pw
             },
-            success: function (data, textStatus, jqXHR) {
+            /**
+             * @param data.msg
+             * @param data.token
+             * @param data.success
+             */
+            success: function (data) {
                 if (data.success === true) {
                     chrome.storage.sync.set({'token': data.token});
                     location.href = 'settings.html';
