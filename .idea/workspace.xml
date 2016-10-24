@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1bd96c1c-65d2-446c-befc-80eac669d918" name="Default" comment="">
+    <list default="true" id="1bd96c1c-65d2-446c-befc-80eac669d918" name="Default" comment="justgage library added">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendors/justgage-1.2.2/justgage.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendors/justgage-1.2.2/raphael-2.1.4.min.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/lichess.org.js" afterPath="$PROJECT_DIR$/js/lichess.org.js" />
     </list>
     <ignored path="ChessHook.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -37,8 +38,8 @@
       <file leaf-file-name="lichess.org.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/lichess.org.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="123">
-              <caret line="81" column="62" selection-start-line="81" selection-start-column="62" selection-end-line="81" selection-end-column="62" />
+            <state relative-caret-position="378">
+              <caret line="33" column="38" selection-start-line="33" selection-start-column="38" selection-end-line="33" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -196,6 +197,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -276,8 +279,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -408,7 +409,8 @@
       <workItem from="1476494756758" duration="2137000" />
       <workItem from="1477216820865" duration="5467000" />
       <workItem from="1477224818914" duration="25337000" />
-      <workItem from="1477268698922" duration="106000" />
+      <workItem from="1477268698922" duration="129000" />
+      <workItem from="1477269270998" duration="285000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1456844392052</created>
@@ -697,17 +699,24 @@
       <option name="project" value="LOCAL" />
       <updated>1477250403011</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="message changed">
+      <created>1477268815783</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1477268815783</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="220823000" />
+    <option name="totallyTimeSpent" value="221131000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="30" width="1366" height="738" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21187684" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21187684" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296146" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -738,8 +747,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="color squares ok" />
-    <MESSAGE value="FIX color black side" />
     <MESSAGE value="evaluation added" />
     <MESSAGE value="evaluation improved" />
     <MESSAGE value="assets added for gauge" />
@@ -763,7 +770,9 @@
     <MESSAGE value="remove pgn function" />
     <MESSAGE value="remove justgage" />
     <MESSAGE value="gauge working" />
-    <option name="LAST_COMMIT_MESSAGE" value="gauge working" />
+    <MESSAGE value="message changed" />
+    <MESSAGE value="justgage library added" />
+    <option name="LAST_COMMIT_MESSAGE" value="justgage library added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -990,8 +999,8 @@
     <entry file="file://$PROJECT_DIR$/js/gauge.min.js" />
     <entry file="file://$PROJECT_DIR$/js/lichess.org.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="123">
-          <caret line="81" column="62" selection-start-line="81" selection-start-column="62" selection-end-line="81" selection-end-column="62" />
+        <state relative-caret-position="378">
+          <caret line="33" column="38" selection-start-line="33" selection-start-column="38" selection-end-line="33" selection-end-column="38" />
           <folding />
         </state>
       </provider>
