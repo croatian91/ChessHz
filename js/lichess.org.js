@@ -1,15 +1,10 @@
-/**
- * Created by croatian91 on 01/03/16.
- */
-
 $(document).ready(function () {
     const MIN = -10.0;
     const MAX = 10.0;
 
+    var gauge;
     var port = chrome.runtime.connect({name: "easy-chess"});
-    var gauge = null;
     var board = $('.top .cg-board');
-
     var fromSquare = $('<div>', {
         'id': 'ChessHz-square-from',
         'style': 'position: absolute; ' +
@@ -24,11 +19,11 @@ $(document).ready(function () {
         'background-color: #f55252;'
     });
 
-    fromSquare.appendTo(board);
-    toSquare.appendTo(board);
-
     $.get(chrome.extension.getURL('/status.html'), function (data) {
         $('.table_wrap > div:last-child').before(data);
+
+        fromSquare.appendTo(board);
+        toSquare.appendTo(board);
 
         gauge = new JustGage({
             id: "gauge",
@@ -53,17 +48,34 @@ $(document).ready(function () {
     });
 
     /**
+     * Send new position to the server.
+     *
+     * @param port
+     * @param moves
+     * @param wtime
+     * @param btime
+     */
+    function send(port, moves, wtime, btime) {
+        port.postMessage(JSON.stringify({
+            'job': 'analyze',
+            'moves': moves,
+            'wtime': parseInt(milliseconds(wtime)),
+            'btime': parseInt(milliseconds(btime))
+        }));
+    }
+
+    /**
      * Converts time in milliseconds.
      *
      * @param time
      * @returns {*} time in milliseconds or null.
      */
-    function milli(time) {
+    function milliseconds(time) {
         return (time && time.length > 1) ? (time[0] * 60000 + parseInt(time[1]) * 1000) : null;
     }
 
     /**
-     * Returns the offset of the square and its size given.
+     * Returns the offset of the square.
      *
      * @param letter
      * @param number
@@ -74,15 +86,16 @@ $(document).ready(function () {
         var letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
         var numbers = ['8', '7', '6', '5', '4', '3', '2', '1'];
 
-        return ($('.top .cg-board').hasClass('orientation-white')) ?
+        return ($(board).hasClass('orientation-white')) ?
         {top: numbers.indexOf(number) * size, left: letters.indexOf(letter) * size} :
         {top: numbers.reverse().indexOf(number) * size, left: letters.reverse().indexOf(letter) * size};
     }
 
     /**
+     * Highlight squares corresponding to engine's response.
      *
-     * @param from initial square
-     * @param to final square
+     * @param from
+     * @param to
      */
     function highlightSquares(from, to) {
         var size = $('square').first().width();
@@ -109,14 +122,11 @@ $(document).ready(function () {
     }
 
     /**
-     * @param data.info.score.value
-     * @param data.info.score.type
-     * @param data.info.pv
-     * @param data.turn
+     * Update the client e.g. gauge, highlighted squares.
+     *
+     * @param response output of the uci.
      */
-    port.onMessage.addListener(function (message) {
-        var response = JSON.parse(message);
-
+    function refresh(response) {
         if (response &&
             response.hasOwnProperty('info') &&
             response.hasOwnProperty('turn') &&
@@ -144,6 +154,18 @@ $(document).ready(function () {
 
             $('span#ChessHz-message').text('Best move: ' + response.info[0].pv[0]);
         }
+    }
+
+    /**
+     * @param data.info.score.value
+     * @param data.info.score.type
+     * @param data.info.pv
+     * @param data.turn
+     */
+    port.onMessage.addListener(function (message) {
+        var response = JSON.parse(message);
+
+        refresh(response);
     });
 
     $('.moves').on('DOMNodeInserted	', function (e) {
@@ -162,12 +184,7 @@ $(document).ready(function () {
                 moves.push(move);
             });
 
-            port.postMessage(JSON.stringify({
-                'job': 'analyze',
-                'moves': moves,
-                'wtime': parseInt(milli(wtime)),
-                'btime': parseInt(milli(btime))
-            }));
+            send(port, moves, wtime, btime);
 
             // chrome.storage.sync.get('show-best-move', function (item) {
             //     if (item['show-best-move'] === true)
