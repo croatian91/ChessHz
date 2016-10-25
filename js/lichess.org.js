@@ -164,9 +164,13 @@ $(document).ready(function () {
      * @param data.turn
      */
     port.onMessage.addListener(function (message) {
-        var response = JSON.parse(message);
+        try {
+            var response = JSON.parse(message);
 
-        refresh(response);
+            refresh(response);
+        } catch (e){
+            console.error(e)
+        }
     });
 
     $('.moves').on('DOMNodeInserted	', function (e) {
