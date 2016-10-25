@@ -130,12 +130,12 @@ $(document).ready(function () {
         if (response &&
             response.hasOwnProperty('info') &&
             response.hasOwnProperty('turn') &&
+            response.hasOwnProperty('bestmove') &&
             response.info.length > 0) {
             var turn = (response.turn === 'w') ? 1 : -1;
             var type = response.info[0].score.type;
             var val = (type === 'cp') ? response.info[0].score.value * turn / 100 : ((turn > 0) ? MAX : MIN);
-            var from = response.info[0].pv[0].substring(0, 2);
-            var to = response.info[0].pv[0].substring(2, 4);
+            var bestMove = response.bestmove.bestmove;
 
             console.log(response);
 
@@ -150,9 +150,10 @@ $(document).ready(function () {
                 "text": type
             });
 
-            highlightSquares(from, to);
+            highlightSquares(bestMove.from, bestMove.to);
 
-            $('span#ChessHz-message').text('Best move: ' + response.info[0].pv[0]);
+            $('span#ChessHz-message').text(
+                'bestmove: ' + bestMove.from + bestMove.to + bestMove.promotion);
         }
     }
 
