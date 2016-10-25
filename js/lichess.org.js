@@ -122,7 +122,7 @@ $(document).ready(function () {
     }
 
     /**
-     * Update the client e.g. gauge, highlighted squares.
+     * Refresh the client e.g. gauge, highlighted squares.
      *
      * @param response output of the uci.
      */
