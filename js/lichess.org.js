@@ -1,19 +1,15 @@
 $(document).ready(function () {
     var port = chrome.runtime.connect({name: "easy-chess"});
 
-    init();
+    init(WebsitesEnum.LICHESS);
 
-    /**
-     * @param data.info.score.value
-     * @param data.info.score.type
-     * @param data.info.pv
-     * @param data.turn
-     */
     port.onMessage.addListener(function (message) {
         try {
             var response = JSON.parse(message);
+            var orientation = $('.lichess_board > .cg-board-wrap > .orientation-white').length > 0;
+            var size = $('square').first().width();
 
-            refresh(response);
+            refresh(response, orientation, size);
         } catch (e) {
             console.error(e)
         }

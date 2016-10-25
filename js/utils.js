@@ -3,14 +3,39 @@
 const MIN = -10.0;
 const MAX = 10.0;
 
+/**
+ * @enum
+ * @type {{LICHESS: number, CHESS: number, CHESS24: number, selectors: {1: {board: string, container: string, size: string}, 2: {board: string, container: string, size: string}, 3: {board: string, container: string, size: string}}}}
+ */
+var WebsitesEnum = {
+    LICHESS: 1,
+    CHESS: 2,
+    CHESS24: 3,
+    selectors: {
+        1: {
+            board: '.top .cg-board',
+            container: '.table_wrap > div:last-child'
+        },
+        2: {
+            board: '',
+            container: ''
+        },
+        3: {
+            board: '',
+            container: ''
+        }
+    }
+};
+
 var gauge;
 
 /**
  * Initialization.
+ *
+ * @param website need to know which website we are deeling with.
  */
-function init() {
+function init(website) {
     $.get(chrome.extension.getURL('/status.html'), function (data) {
-        var board = $('.top .cg-board');
         var fromSquare = $('<div>', {
             'id': 'ChessHz-square-from',
             'style': 'position: absolute; ' +
@@ -25,7 +50,10 @@ function init() {
             'background-color: #f55252;'
         });
 
-        $('.table_wrap > div:last-child').before(data);
+        var board = $(WebsitesEnum.selectors[website].board);
+
+        //Inject status.
+        $(WebsitesEnum.selectors[website].container).before(data);
 
         fromSquare.appendTo(board);
         toSquare.appendTo(board);
@@ -57,9 +85,9 @@ function init() {
  * Send new position to the server.
  *
  * @param port
- * @param moves
- * @param wtime
- * @param btime
+ * @param moves array of moves in SAN.
+ * @param wtime white time remaining in milliseconds.
+ * @param btime black time remaining in milliseconds.
  */
 function send(port, moves, wtime, btime) {
     port.postMessage(JSON.stringify({
@@ -77,22 +105,23 @@ function send(port, moves, wtime, btime) {
  * @returns {*} time in milliseconds or null.
  */
 function milliseconds(time) {
-    return (time && time.length > 1) ? (time[0] * 60000 + parseInt(time[1]) * 1000) : null;
+    return (time !== undefined && time.length > 1) ? (time[0] * 60000 + parseInt(time[1]) * 1000) : null;
 }
 
 /**
  * Returns the offset of the square.
  *
- * @param letter
- * @param number
- * @param size
+ * @param letter e.g. e2 => e.
+ * @param number e.g. e2 => 2.
+ * @param orientation white or black oriented board.
+ * @param size width or height of the square.
  * @returns {{top: number, left: number}}
  */
-function offset(letter, number, size) {
+function offset(letter, number, orientation, size) {
     var letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
     var numbers = ['8', '7', '6', '5', '4', '3', '2', '1'];
 
-    return ($('.top .cg-board').hasClass('orientation-white')) ?
+    return (orientation) ?
     {top: numbers.indexOf(number) * size, left: letters.indexOf(letter) * size} :
     {top: numbers.reverse().indexOf(number) * size, left: letters.reverse().indexOf(letter) * size};
 }
@@ -100,13 +129,14 @@ function offset(letter, number, size) {
 /**
  * Highlight squares corresponding to engine's response.
  *
- * @param from
- * @param to
+ * @param from initial square.
+ * @param to final square.
+ * @param orientation white or black oriented board.
+ * @param size width or height of the square.
  */
-function highlightSquares(from, to) {
-    var size = $('square').first().width();
-    var fromOffset = offset(from.substring(0, 1), from.substring(1, 2), size);
-    var toOffset = offset(to.substring(0, 1), to.substring(1, 2), size);
+function highlightSquares(from, to, orientation, size) {
+    var fromOffset = offset(from.substring(0, 1), from.substring(1, 2), orientation, size);
+    var toOffset = offset(to.substring(0, 1), to.substring(1, 2), orientation, size);
     var fromSquare = $('#ChessHz-square-from');
     var toSquare = $('#ChessHz-square-to');
 
@@ -119,7 +149,6 @@ function highlightSquares(from, to) {
         position: 'absolute'
     });
 
-    toSquare.parent().css({position: 'relative'});
     toSquare.css({
         top: toOffset.top,
         left: toOffset.left,
@@ -133,18 +162,28 @@ function highlightSquares(from, to) {
  * Refresh the client e.g. gauge, highlighted squares.
  *
  * @param response output of the uci.
+ * @param orientation white or black oriented board.
+ * @param size width or height of the square.
+ * @param response.bestmove
+ * @param response.info.score.value
+ * @param response.info.score.type
+ * @param response.info.pv
+ * @param response.turn
+ * @param response.promotion
+ * @param response.from
+ * @param response.to
  */
-function refresh(response) {
-    if (response &&
+function refresh(response, orientation, size) {
+    if (response !== undefined &&
+        response.info.length > 0 &&
         response.hasOwnProperty('info') &&
         response.hasOwnProperty('turn') &&
-        response.hasOwnProperty('bestmove') &&
-        response.info.length > 0) {
+        response.hasOwnProperty('bestmove')
+    ) {
         var turn = (response.turn === 'w') ? 1 : -1;
         var type = response.info[0].score.type;
         var val = (type === 'cp') ? response.info[0].score.value * turn / 100 : ((turn > 0) ? MAX : MIN);
         var bestMove = response.bestmove.bestmove;
-        //var gauge = document.getElementById('gauge');
 
         console.log(response);
 
@@ -159,7 +198,7 @@ function refresh(response) {
             "text": type
         });
 
-        highlightSquares(bestMove.from, bestMove.to);
+        highlightSquares(bestMove.from, bestMove.to, orientation, size);
 
         $('span#ChessHz-message').text(
             'bestmove: ' + bestMove.from + bestMove.to + bestMove.promotion);
