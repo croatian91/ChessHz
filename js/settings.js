@@ -1,11 +1,23 @@
 $(document).ready(function () {
     (function ($) {
         var checkboxes = $("[type='checkbox']");
+        var strengthSlider = $('#strength-slider');
         var token = '';
 
         checkboxes.bootstrapSwitch('size', 'mini');
 
-        $("#strength-slider").slider();
+        strengthSlider.slider();
+
+        strengthSlider.on('slideStop', function () {
+            var o = {};
+
+            o['strength-slider'] = $(this).data('slider').getValue();
+            chrome.storage.sync.set(o);
+        });
+
+        chrome.storage.sync.get('strength-slider', function (item) {
+            $('#strength-slider').slider('setValue', item['strength-slider']);
+        });
 
         $.each(checkboxes, function (index, value) {
             var setting = $(value).attr('name');
