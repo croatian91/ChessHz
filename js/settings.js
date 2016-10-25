@@ -5,6 +5,8 @@ $(document).ready(function () {
 
         checkboxes.bootstrapSwitch('size', 'mini');
 
+        $("#strength-slider").slider();
+
         $.each(checkboxes, function (index, value) {
             var setting = $(value).attr('name');
 
