@@ -187,7 +187,10 @@ function refresh(response, orientation, size) {
 
         console.log(response);
 
-        gauge.refresh(val);
+        chrome.storage.sync.get('show-gauge', function (item) {
+            if (item['show-gauge'] === true)
+                gauge.refresh(val);
+        });
 
         if (type === 'mate')
             gauge.txtValue.attr({
