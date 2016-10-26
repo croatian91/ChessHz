@@ -57,6 +57,21 @@ function init(website) {
         //Inject status.
         $(WebsitesEnum.selectors[website].container).before(data);
 
+        chrome.storage.sync.get('show-gauge', function (item) {
+            if (item['show-gauge'] === false)
+                $('#ChessHz-gauge').hide();
+        });
+
+        chrome.storage.sync.get('highlight-squares', function (item) {
+            if (item['highlight-squares'] === false)
+                $('.ChessHz-square').hide();
+        });
+
+        chrome.storage.sync.get('show-best-move', function (item) {
+            if (item['show-best-move'] === false)
+                $('#ChessHz-status').hide();
+        });
+
         chrome.runtime.onMessage.addListener(
             function (request) {
                 if (request != undefined && request.hasOwnProperty('setting') && request.hasOwnProperty('state')) {
@@ -228,29 +243,20 @@ function refresh(response, orientation, size) {
 
         console.log(response);
 
-        chrome.storage.sync.get('show-gauge', function (item) {
-            if (item['show-gauge'] === true)
-                gauge.refresh(val);
-        });
-
-        if (type === 'mate')
-            gauge.txtValue.attr({
-                "text": response.info[0].score.value
-            });
-
-        gauge.txtLabel.attr({
-            "text": type
-        });
-
-        chrome.storage.sync.get('highlight-squares', function (item) {
-            if (item['highlight-squares'] === true)
-                highlightSquares(bestMove.from, bestMove.to, orientation, size);
-        });
-
-        chrome.storage.sync.get('show-best-move', function (item) {
-            if (item['show-best-move'] === true)
-                $('span#ChessHz-message').text(
-                    'bestmove: ' + bestMove.from + bestMove.to + bestMove.promotion);
-        });
+        gauge.refresh(val);
     }
+
+    if (type === 'mate')
+        gauge.txtValue.attr({
+            "text": response.info[0].score.value
+        });
+
+    gauge.txtLabel.attr({
+        "text": type
+    });
+
+    highlightSquares(bestMove.from, bestMove.to, orientation, size);
+
+    $('span#ChessHz-message').text(
+        'bestmove: ' + bestMove.from + bestMove.to + bestMove.promotion);
 }
