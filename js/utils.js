@@ -38,12 +38,14 @@ function init(website) {
     $.get(chrome.extension.getURL('/status.html'), function (data) {
         var fromSquare = $('<div>', {
             'id': 'ChessHz-square-from',
+            'class': 'ChessHz-square',
             'style': 'position: absolute; ' +
             'z-index: 1; ' +
             'opacity: 0.7; ' +
             'background-color: #7ef502;'
         }), toSquare = $('<div>', {
             'id': 'ChessHz-square-to',
+            'class': 'ChessHz-square',
             'style': 'position: absolute; ' +
             'z-index: 1; ' +
             'opacity: 0.7; ' +
@@ -54,6 +56,42 @@ function init(website) {
 
         //Inject status.
         $(WebsitesEnum.selectors[website].container).before(data);
+
+        chrome.runtime.onMessage.addListener(
+            function (request) {
+                if (request != undefined && request.hasOwnProperty('setting') && request.hasOwnProperty('state')) {
+                    var state = request.state;
+                    var b = $('#ChessHz-status');
+                    var g = $('#ChessHz-gauge');
+                    var s = $('.ChessHz-square');
+
+                    switch (request.setting) {
+                        case 'enable-app':
+                            if (state) {
+                                g.fadeIn('fast');
+                                b.fadeIn('fast');
+                                s.fadeIn('fast');
+                            } else {
+                                g.fadeOut('fast');
+                                b.fadeOut('fast');
+                                s.fadeOut('fast');
+                            }
+                            break;
+                        case 'show-gauge':
+                            (state) ? g.fadeIn('fast') : g.fadeOut('fast');
+                            break;
+                        case 'show-best-move':
+                            (state) ? b.fadeIn('fast') : b.fadeOut('fast');
+                            break;
+                        case 'highlight-squares':
+                            (state) ? s.fadeIn('fast') : s.fadeOut('fast');
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        );
 
         fromSquare.appendTo(board);
         toSquare.appendTo(board);

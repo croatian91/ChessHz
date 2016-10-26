@@ -33,6 +33,12 @@ $(document).ready(function () {
 
             o[setting] = state;
             chrome.storage.sync.set(o);
+
+            chrome.tabs.query({url: ['https://*.lichess.org/*', 'https://chess24.com/*/game/*']}, function (tabs) {
+                tabs.forEach(function (tab) {
+                    chrome.tabs.sendMessage(tab.id, {setting: setting, state: state});
+                });
+            });
         });
 
         chrome.storage.sync.get('token', function (item) {
