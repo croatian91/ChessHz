@@ -51,7 +51,7 @@ function init(website) {
             'opacity: 0.7; ' +
             'background-color: #f55252;'
         });
-
+        var enabled = true;
         var board = $(WebsitesEnum.selectors[website].board);
 
         //Inject status.
@@ -59,24 +59,22 @@ function init(website) {
 
         chrome.storage.sync.get('enable-app', function (item) {
             if (item['enable-app'] === false) {
-                $('#ChessHz-gauge').hide();
-                $('.ChessHz-square').hide();
-                $('#ChessHz-status').hide();
+                enabled = false;
             }
         });
 
         chrome.storage.sync.get('show-gauge', function (item) {
-            if (item['show-gauge'] === false)
+            if (item['show-gauge'] === false || !enabled)
                 $('#ChessHz-gauge').hide();
         });
 
         chrome.storage.sync.get('highlight-squares', function (item) {
-            if (item['highlight-squares'] === false)
+            if (item['highlight-squares'] === false || !enabled)
                 $('.ChessHz-square').hide();
         });
 
         chrome.storage.sync.get('show-best-move', function (item) {
-            if (item['show-best-move'] === false)
+            if (item['show-best-move'] === false || !enabled)
                 $('#ChessHz-status').hide();
         });
 
