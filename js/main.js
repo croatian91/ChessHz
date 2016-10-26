@@ -1,13 +1,18 @@
 var ws = new WebSocket("ws://localhost:1337/");
 
-chrome.runtime.onConnect.addListener(function (p) {
-    p.onMessage.addListener(function (msg) {
-        ws.send(msg);
+chrome.extension.onConnect.addListener(function (port) {
+    port.onMessage.addListener(function (request) {
+        ws.send(request);
     });
 
     ws.onmessage = function (event) {
-        p.postMessage(event.data);
+        port.postMessage(event.data);
     };
+});
+
+chrome.extension.onMessage.addListener(function (request) {
+    if (request !== undefined)
+        ws.send(request);
 });
 
 

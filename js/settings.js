@@ -10,9 +10,20 @@ $(document).ready(function () {
 
         strengthSlider.on('slideStop', function () {
             var o = {};
+            var value = $(this).data('slider').getValue();
+            var port = chrome.extension.connect({
+                name: "settings"
+            });
 
-            o['strength-slider'] = $(this).data('slider').getValue();
+            o['strength-slider'] = value;
+
             chrome.storage.sync.set(o);
+            chrome.runtime.sendMessage(
+                JSON.stringify({
+                    job: 'setOption',
+                    setting: 'Skill Level',
+                    value: value
+                }));
         });
 
         chrome.storage.sync.get('strength-slider', function (item) {
