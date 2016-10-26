@@ -57,6 +57,14 @@ function init(website) {
         //Inject status.
         $(WebsitesEnum.selectors[website].container).before(data);
 
+        chrome.storage.sync.get('enable-app', function (item) {
+            if (item['enable-app'] === false) {
+                $('#ChessHz-gauge').hide();
+                $('.ChessHz-square').hide();
+                $('#ChessHz-status').hide();
+            }
+        });
+
         chrome.storage.sync.get('show-gauge', function (item) {
             if (item['show-gauge'] === false)
                 $('#ChessHz-gauge').hide();
