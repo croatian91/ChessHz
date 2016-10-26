@@ -90,12 +90,15 @@ function init(website) {
  * @param btime black time remaining in milliseconds.
  */
 function send(port, moves, wtime, btime) {
-    port.postMessage(JSON.stringify({
-        'job': 'analyze',
-        'moves': moves,
-        'wtime': parseInt(milliseconds(wtime)),
-        'btime': parseInt(milliseconds(btime))
-    }));
+    chrome.storage.sync.get('enable-app', function (item) {
+        if (item['enable-app'] === true)
+            port.postMessage(JSON.stringify({
+                'job': 'analyze',
+                'moves': moves,
+                'wtime': parseInt(milliseconds(wtime)),
+                'btime': parseInt(milliseconds(btime))
+            }));
+    });
 }
 
 /**
