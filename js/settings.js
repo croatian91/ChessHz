@@ -11,9 +11,6 @@ $(document).ready(function () {
         strengthSlider.on('slideStop', function () {
             var o = {};
             var value = $(this).data('slider').getValue();
-            var port = chrome.extension.connect({
-                name: "settings"
-            });
 
             o['strength-slider'] = value;
 
