@@ -21,8 +21,8 @@ var WebsitesEnum = {
             container: ''
         },
         3: {
-            board: '',
-            container: ''
+            board: '.svg',
+            container: 'div.right > div.top'
         }
     }
 };
