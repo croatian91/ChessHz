@@ -203,7 +203,10 @@ function refresh(response, orientation, size) {
                 highlightSquares(bestMove.from, bestMove.to, orientation, size);
         });
 
-        $('span#ChessHz-message').text(
-            'bestmove: ' + bestMove.from + bestMove.to + bestMove.promotion);
+        chrome.storage.sync.get('show-best-move', function (item) {
+            if (item['show-best-move'] === true)
+                $('span#ChessHz-message').text(
+                    'bestmove: ' + bestMove.from + bestMove.to + bestMove.promotion);
+        });
     }
 }
