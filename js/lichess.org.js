@@ -32,11 +32,6 @@ $(document).ready(function () {
             });
 
             send(port, moves, wtime, btime);
-
-            // chrome.storage.sync.get('show-best-move', function (item) {
-            //     if (item['show-best-move'] === true)
-            //
-            // });
         }
     });
     console.log('CoreHz - Injection completed. Have fun!');
