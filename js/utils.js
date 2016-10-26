@@ -198,7 +198,10 @@ function refresh(response, orientation, size) {
             "text": type
         });
 
-        highlightSquares(bestMove.from, bestMove.to, orientation, size);
+        chrome.storage.sync.get('highlight-squares', function (item) {
+            if (item['highlight-squares'] === true)
+                highlightSquares(bestMove.from, bestMove.to, orientation, size);
+        });
 
         $('span#ChessHz-message').text(
             'bestmove: ' + bestMove.from + bestMove.to + bestMove.promotion);
