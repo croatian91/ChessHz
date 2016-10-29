@@ -19,7 +19,7 @@ class WSHandler(tornado.websocket.WebSocketHandler):
         source = data['from']
         destination = data['to']
         offset = data['offset']
-        
+
         m.click(source['x'] + offset, source['y'] + offset)
         m.click(destination['x'] + offset, destination['y'] + offset)
  
