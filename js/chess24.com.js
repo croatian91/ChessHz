@@ -10,7 +10,7 @@ $(document).ready(function () {
             var size = $('.cell').first().width();
 
             refresh(response, orientation, size);
-            move(port, size / 2);
+            move(port, orientation, response.turn, size / 2);
 
         } catch (e) {
             console.error(e)

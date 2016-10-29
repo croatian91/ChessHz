@@ -226,12 +226,12 @@ function highlightSquares(from, to, orientation, size) {
  * @param port
  * @param offset size / 2 => center of the square.
  */
-function move(port, offset) {
+function move(port, orientation, turn, offset) {
     var from = $('#ChessHz-square-from').offset();
     var to = $('#ChessHz-square-to').offset();
 
     chrome.storage.sync.get('enable-bot', function (item) {
-        if (item['enable-bot'] === true)
+        if (item['enable-bot'] === true && orientation && turn === 'w' || !orientation && turn === 'b')
             port.postMessage(JSON.stringify({
                 "job": "move",
                 "from": {"x": from.left + window.screenX, "y": from.top + window.screenY + 60},
