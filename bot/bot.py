@@ -7,7 +7,6 @@ import tornado.web
 import socket
 import json
 
-from time import sleep
 from pymouse import PyMouse
  
 class WSHandler(tornado.websocket.WebSocketHandler):
@@ -17,13 +16,11 @@ class WSHandler(tornado.websocket.WebSocketHandler):
     def on_message(self, message):
         m = PyMouse()
         data = json.loads(message)
-        print data
         source = data['from']
         destination = data['to']
         offset = data['offset']
         
         m.click(source['x'] + offset, source['y'] + offset)
-        sleep(0.1)
         m.click(destination['x'] + offset, destination['y'] + offset)
  
     def on_close(self):
