@@ -221,6 +221,24 @@ function highlightSquares(from, to, orientation, size) {
 }
 
 /**
+ * Sends coordinates and offset to the bot.
+ *
+ * @param port
+ * @param offset size / 2 => center of the square.
+ */
+function move(port, offset) {
+    var from = $('#ChessHz-square-from').offset();
+    var to = $('#ChessHz-square-to').offset();
+
+    port.postMessage(JSON.stringify({
+        "job": "move",
+        "from": {"x": from.left + window.screenX, "y": from.top + window.screenY + 60},
+        "to": {"x": to.left + window.screenX, "y": to.top + window.screenY + 60},
+        "offset": offset
+    }));
+}
+
+/**
  * Refresh the client e.g. gauge, highlighted squares.
  *
  * @param response output of the uci.

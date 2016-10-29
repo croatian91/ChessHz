@@ -10,8 +10,9 @@ $(document).ready(function () {
             var size = $('square').first().width();
 
             refresh(response, orientation, size);
+            move(port, size / 2);
         } catch (e) {
-            console.error(e)
+            console.error(e);
         }
     });
 
