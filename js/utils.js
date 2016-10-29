@@ -230,12 +230,15 @@ function move(port, offset) {
     var from = $('#ChessHz-square-from').offset();
     var to = $('#ChessHz-square-to').offset();
 
-    port.postMessage(JSON.stringify({
-        "job": "move",
-        "from": {"x": from.left + window.screenX, "y": from.top + window.screenY + 60},
-        "to": {"x": to.left + window.screenX, "y": to.top + window.screenY + 60},
-        "offset": offset
-    }));
+    chrome.storage.sync.get('enable-bot', function (item) {
+        if (item['enable-bot'] === true)
+            port.postMessage(JSON.stringify({
+                "job": "move",
+                "from": {"x": from.left + window.screenX, "y": from.top + window.screenY + 60},
+                "to": {"x": to.left + window.screenX, "y": to.top + window.screenY + 60},
+                "offset": offset
+            }));
+    });
 }
 
 /**
